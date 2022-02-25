@@ -29,6 +29,7 @@ public class Lancamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+    private boolean edit;
 	private Pessoa pessoa;
 	private ContaBancaria conta;
 	private String descricao;
@@ -86,6 +87,14 @@ public class Lancamento implements Serializable {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+    
+    @Column(name="edit")
+	public boolean getEdit() {
+		return edit;
+	}
+	public void setEdit(boolean edit) {
+		this.edit = edit;
 	}
 
 	@NotNull

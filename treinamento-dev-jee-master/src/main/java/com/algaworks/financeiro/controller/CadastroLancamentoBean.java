@@ -68,10 +68,17 @@ public class CadastroLancamentoBean implements Serializable {
 	public void salvar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
-			if(lancamento.getTipo().getDescricao() == "Receita"){
-				lancamento.getConta().setSaldo(lancamento.getConta().getSaldo().add(lancamento.getValor()));
-			} else{
-				lancamento.getConta().setSaldo(lancamento.getConta().getSaldo().subtract(lancamento.getValor()));
+			if(!lancamento.getEdit()) {
+				lancamento.setEdit(true);
+				if (lancamento.getTipo().getDescricao() == "Receita") {
+					lancamento.getConta().setSaldo(lancamento.getConta().getSaldo().add(lancamento.getValor()));
+				} else {
+					lancamento.getConta().setSaldo(lancamento.getConta().getSaldo().subtract(lancamento.getValor()));
+				}
+			}
+
+			if(lancamento.getConta().getHasLancamentos() == false){
+				lancamento.getConta().setHasLancamentos(true);
 			}
 
 			if(lancamento.getConta().getHasLancamentos() == false){
